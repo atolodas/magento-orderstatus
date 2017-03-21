@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Cammino_Orderstatus>
+			<version>0.0.1</version>
+		</Cammino_Orderstatus>
+	</modules>
+	<global>
+		<models>
+			<orderstatus>
+				<class>Cammino_Orderstatus_Model</class>
+			</orderstatus>
+		</models>
+		
+		<helpers>
+			<orderstatus>
+				<class>Cammino_Orderstatus_Helper</class>
+			</orderstatus>
+		</helpers>
+
+		<blocks>
+			<adminhtml>
+				<rewrite>
+					<sales_order_view_history>Cammino_Orderstatus_Block_Adminhtml_Sales_Order_View_History</sales_order_view_history>
+				</rewrite>
+			</adminhtml>
+		</blocks>
+
+	</global>
+
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<Cammino_Orderstatus before="Mage_Adminhtml">Cammino_Orderstatus_Adminhtml</Cammino_Orderstatus>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+
+</config>
