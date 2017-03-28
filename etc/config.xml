@@ -9,9 +9,36 @@
 		<models>
 			<orderstatus>
 				<class>Cammino_Orderstatus_Model</class>
+				<resourceModel>orderstatus_mysql4</resourceModel>
 			</orderstatus>
+			<orderstatus_mysql4>
+				<class>Cammino_Orderstatus_Model_Mysql4</class>
+				<entities>
+					<orderstatus>
+						<table>orderstatus</table>
+					</orderstatus>
+				</entities>
+			</orderstatus_mysql4>
 		</models>
 		
+		<resources>
+            <orderstatus_setup>
+                <setup>
+                    <module>Cammino_Orderstatus</module>
+                </setup>
+            </orderstatus_setup>
+            <orderstatus_write>
+            	<connection>
+            		<use>core_write</use>
+            	</connection>
+            </orderstatus_write>
+            <orderstatus_read>
+            	<connection>
+            		<use>core_read</use>
+            	</connection>
+            </orderstatus_read>
+        </resources>
+
 		<helpers>
 			<orderstatus>
 				<class>Cammino_Orderstatus_Helper</class>
@@ -19,6 +46,9 @@
 		</helpers>
 
 		<blocks>
+			<orderstatus>
+				<class>Cammino_Orderstatus_Block</class>
+			</orderstatus>
 			<adminhtml>
 				<rewrite>
 					<sales_order_view_history>Cammino_Orderstatus_Block_Adminhtml_Sales_Order_View_History</sales_order_view_history>
@@ -39,5 +69,15 @@
 			</adminhtml>
 		</routers>
 	</admin>
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<orderstatus>
+					<file>orderstatus.xml</file>
+				</orderstatus>
+			</updates>
+		</layout>
+	</adminhtml>
 
 </config>
