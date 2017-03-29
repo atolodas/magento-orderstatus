@@ -1,0 +1,30 @@
+<?php
+$orderId = $this->getRequest()->getParam('order_id');
+$collection = $this->getHistoryData($orderId);
+$helper = Mage::helper("orderstatus");
+?>
+
+<div class="grid">
+	<div class="hor-scroll">
+		<table class="data">
+			<thead>
+				<tr class="headings">
+					<th><span class="nobr"><span class="sort-title">Data da alteração</span></span></th>
+					<th><span class="nobr"><span class="sort-title">Status Antigo</span></span></th>
+					<th><span class="nobr"><span class="sort-title">Novo Status</span></span></th>
+					<th><span class="nobr"><span class="sort-title">Alterado por</span></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($collection as $item): ?>
+					<tr>
+						<td><?php echo Mage::helper('core')->formatDate($item->date, 'medium', true); ?></td>
+						<td><?php echo $helper->getLabelByStatus($item->old_status); ?></td>
+						<td><?php echo $helper->getLabelByStatus($item->new_status); ?></td>
+						<td><?php echo $item->user; ?></td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+</div>

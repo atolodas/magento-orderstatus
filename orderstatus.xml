@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout>
+	<adminhtml_sales_order_view>
+		<reference name="sales_order_tabs">
+			<action method="addTab">
+				<name>orderstatustab</name>
+				<block>orderstatus/adminhtml_history</block>
+			</action>
+		</reference>
+	</adminhtml_sales_order_view>
+</layout>

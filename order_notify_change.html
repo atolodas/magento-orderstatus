@@ -1,0 +1,34 @@
+<!--@subject Mudança de status no pedido #{{var order_id}} @-->
+<body>
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	    <tr>
+	        <td>
+	            <table border="0" cellpadding="5" cellspacing="0">
+	            	<tr>
+	            		<td colspan="2"><h3>Alteração Status do Pedido</h3></td>
+	            	</tr>
+	                <tr>
+	                    <td><strong>Pedido</strong></td>
+	                    <td>#{{var order_id}}</td>
+	                </tr>
+	                <tr>
+	                    <td><strong>Status Anterior</strong></td>
+	                    <td>{{var old_status}}</td>
+	                </tr>
+	                <tr>
+	                    <td><strong>Novo Status</strong></td>
+	                    <td>{{var new_status}}</td>
+	                </tr>
+	                <tr>
+	                    <td><strong>Alterado por</strong></td>
+	                    <td>{{var user}}</td>
+	                </tr>
+	                <tr>
+	                    <td><strong>Alterado em</strong></td>
+	                    <td>{{var date}}</td>
+	                </tr>
+	            </table>
+	        </td>
+	    </tr>
+	</table>
+</body>
