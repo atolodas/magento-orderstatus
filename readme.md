@@ -14,5 +14,8 @@ $ cp app/code/community/Cammino/Orderstatus/content.phtml app/design/adminhtml/d
 $ cp app/code/community/Cammino/Orderstatus/order_notify_change.html app/locale/pt_BR/template/email
 $ cp app/code/community/Cammino/Orderstatus/orderstatus.xml app/design/adminhtml/default/default/layout
 ```
+#### Configuration
+
+Go to "admin > system > configuration > Status do Pedido > Configuração" and set email that will receive notifications when order change status
 
 **Cammino Digital**
