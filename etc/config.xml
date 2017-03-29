@@ -56,6 +56,16 @@
 			</adminhtml>
 		</blocks>
 
+		<template>
+            <email>
+                <order_notify_change module="Cammino_Orderstatus">
+                    <label>Order Status Changed</label>
+                    <file>order_notify_change.html</file>
+                    <type>html</type>
+                </order_notify_change>
+            </email>
+        </template>
+
 	</global>
 
 	<admin>

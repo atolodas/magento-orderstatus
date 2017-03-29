@@ -49,7 +49,7 @@ class Cammino_Orderstatus_Adminhtml_Sales_OrderController extends Mage_Adminhtml
 				break;
 		}
 
-		$model->saveHistory($orderId, $previousStatus, $actualStatus);
+		$model->saveHistory($orderId, $actualStatus, $previousStatus);
 		$this->_redirect('*/sales_order/view', array('order_id' => $orderId));
 	}
 }

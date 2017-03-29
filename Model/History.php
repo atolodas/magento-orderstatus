@@ -129,20 +129,25 @@ class Cammino_Orderstatus_Model_History extends Mage_Core_Model_Abstract{
     }
 
     /* Save the history of order status change in database */
-    public function saveHistory($orderId, $previousStatus, $actualStatus){
+    public function saveHistory($orderId, $oldStatus, $newStatus){
         
+        $date = date("Y-m-d H:i:s");
+        $user = $this->getAdminUserName();
+
         $data = array(
             "order_id" => $orderId,
-            "user" => $this->getAdminUserName(),
-            "old_status" => $previousStatus,
-            "new_status" => $actualStatus,
-            "date" => date("Y-m-d H:i:s")
+            "user" => $user,
+            "old_status" => $oldStatus,
+            "new_status" => $newStatus,
+            "date" => $date
         );
         
         $model = Mage::getModel('orderstatus/history');
 
         try{
             $model->setData($data)->save();
+            $this->notifyUpdate($orderId, $oldStatus, $newStatus, $user, $date);
+
         }catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -151,5 +156,38 @@ class Cammino_Orderstatus_Model_History extends Mage_Core_Model_Abstract{
     public function getAdminUserName(){
         $admin = Mage::getSingleton('admin/session')->getUser();
         return $admin->getUsername();
+    }
+
+    public function notifyUpdate($orderId, $oldStatus, $newStatus, $user, $date){
+
+        $order = Mage::getModel('sales/order')->load($orderId);
+        $storeId = $order->getStore()->getId();
+        $emailNotificate = Mage::getStoreConfig('orderstatus/orderstatus_group/email_notificate');
+
+        if(!$emailNotificate || strlen($emailNotificate) < 1)
+            return;
+
+        try{
+            $mailer = Mage::getModel('core/email_template_mailer');
+            $emailInfo = Mage::getModel('core/email_info');
+            $emailInfo->addTo($emailNotificate, "Homedock");
+            $helper = Mage::helper('orderstatus');
+
+            $mailer->addEmailInfo($emailInfo);
+            $mailer->setSender(Mage::getStoreConfig(Mage_Sales_Model_Order::XML_PATH_EMAIL_IDENTITY, $storeId));
+            $mailer->setStoreId($storeId);
+            $mailer->setTemplateId("order_notify_change");
+            $mailer->setTemplateParams(array(
+                    'order_id' => $orderId,
+                    'new_status' => $helper->getLabelByStatus($newStatus),
+                    'old_status' => $helper->getLabelByStatus($oldStatus),
+                    'user' => $user,
+                    'date' => Mage::helper('core')->formatDate($date, 'medium', true)
+                )
+            );
+            $mailer->send();
+        }
+        catch (Mage_Core_Exception $e) { var_dump($e->getMessage()); }
+        catch (Exception $e) { var_dump($e->getMessage()); }
     }
 }
