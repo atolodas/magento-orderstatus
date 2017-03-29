@@ -14,9 +14,9 @@
 			<orderstatus_mysql4>
 				<class>Cammino_Orderstatus_Model_Mysql4</class>
 				<entities>
-					<orderstatus>
-						<table>orderstatus</table>
-					</orderstatus>
+					<history>
+						<table>orderstatus_history</table>
+					</history>
 				</entities>
 			</orderstatus_mysql4>
 		</models>

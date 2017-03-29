@@ -9,7 +9,7 @@ class Cammino_Orderstatus_Adminhtml_Sales_OrderController extends Mage_Adminhtml
 		
 		// Instância dos modelos e helpers 
 		$order 	= Mage::getModel('sales/order')->load($orderId);
-		$model 	= Mage::getModel('orderstatus/order');
+		$model 	= Mage::getModel('orderstatus/history');
 		$helper = Mage::helper("orderstatus");
 		
 		// Definição dos status e states (últimos e penúltimos)
@@ -49,6 +49,7 @@ class Cammino_Orderstatus_Adminhtml_Sales_OrderController extends Mage_Adminhtml
 				break;
 		}
 
+		$model->saveHistory($orderId, $previousStatus, $actualStatus);
 		$this->_redirect('*/sales_order/view', array('order_id' => $orderId));
 	}
 }

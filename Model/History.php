@@ -1,5 +1,11 @@
 <?php
-class Cammino_Orderstatus_Model_Order extends Mage_Core_Model_Abstract{
+class Cammino_Orderstatus_Model_History extends Mage_Core_Model_Abstract{
+
+    public function _construct()
+    {
+        parent::_construct();
+        $this->_init('orderstatus/history');
+    }
 
 	public function getActualStatus($order){
         return $order->getStatus();
@@ -120,5 +126,30 @@ class Cammino_Orderstatus_Model_Order extends Mage_Core_Model_Abstract{
         catch (Exception $e) {
             Mage::getSingleton('core/session')->addError("O histórico do status pedido não pode ser apagado: " . $e->getMessage());
         }
+    }
+
+    /* Save the history of order status change in database */
+    public function saveHistory($orderId, $previousStatus, $actualStatus){
+        
+        $data = array(
+            "order_id" => $orderId,
+            "user" => $this->getAdminUserName(),
+            "old_status" => $previousStatus,
+            "new_status" => $actualStatus,
+            "date" => date("Y-m-d H:i:s")
+        );
+        
+        $model = Mage::getModel('orderstatus/history');
+
+        try{
+            $model->setData($data)->save();
+        }catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getAdminUserName(){
+        $admin = Mage::getSingleton('admin/session')->getUser();
+        return $admin->getUsername();
     }
 }
