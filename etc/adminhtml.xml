@@ -1,0 +1,22 @@
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <orderstatus translate="title" module="cammino_orderstatus">
+                                        <title>orderstatus</title>
+                                        <sort_order>999</sort_order>
+                                    </orderstatus>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

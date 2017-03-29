@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <orderstatus translate="label" module="orderstatus">
+            <label>Status do Pedido</label>
+            <sort_order>100</sort_order>
+        </orderstatus>
+    </tabs>
+    <sections>
+        <orderstatus translate="label" module="orderstatus">
+            <label>Configuração</label>
+            <tab>orderstatus</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+ 
+            <groups>
+                <orderstatus_group translate="label" module="orderstatus">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+ 
+                    <fields>
+                        <gokeep_store_id translate="label">
+                            <label>Email notifação</label>
+                            <comment>Email que receberá uma notificação quando um status for alterado</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </gokeep_store_id>
+                    </fields>
+                </orderstatus_group>
+            </groups>
+        </orderstatus>
+    </sections>
+</config>
